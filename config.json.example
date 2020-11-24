@@ -17,6 +17,6 @@
             "dir": "/home/user",
             "port": 22,
             "mount": "~/workspace/somedir2"
-        },
+        }
     ]
 }
