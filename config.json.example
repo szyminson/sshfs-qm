@@ -1,0 +1,22 @@
+{
+    "options": "reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,cache_timeout=3600",
+    "servers": 
+    [
+        {
+            "name": "Name 1",
+            "user": "user",
+            "host": "host",
+            "dir": "/var/www/html",
+            "port": 22,
+            "mount": "~/workspace/somedir"
+        },
+        {
+            "name": "Name 1",
+            "user": "user",
+            "host": "host",
+            "dir": "/home/user",
+            "port": 22,
+            "mount": "~/workspace/somedir2"
+        },
+    ]
+}
