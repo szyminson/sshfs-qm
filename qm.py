@@ -25,7 +25,7 @@ def connect_to(server):
     ssh_command = 'ssh ' + server['user'] + '@' + server['host'] + ' -p ' + str(server['port'])
     subprocess.call(ssh_command, shell = True)
 
-def mount_from(server):
+def mount_from(server, options):
 
     if server['mounted']:
         print('Unmounting', server['name'], 'from', server['mount'])
@@ -37,7 +37,7 @@ def mount_from(server):
         print('Mounting', server['name'], 'at', server['mount'])
 
         mkdir_command = 'mkdir -p ' + server['mount']
-        sshfs_command = 'sshfs -o ' + config['options'] + ' -p ' + str(server['port'])
+        sshfs_command = 'sshfs -o ' + options + ' -p ' + str(server['port'])
         sshfs_command += ' ' + server['user'] + '@' + server['host'] + ':' + server['dir']
         sshfs_command += ' ' + server['mount']
 
@@ -66,11 +66,11 @@ def main(argv):
                 if server['mounted']:
                     print(server['mount'], 'is already a mount point!')
                 else:
-                    mount_from(server)
+                    mount_from(server, config['options'])
             elif opt == '-u':
                 server = config['servers'][int(arg)]
                 if server['mounted']:
-                    mount_from(server)
+                    mount_from(server, config['options'])
                 else:
                     print(server['mount'], 'is not a mount point!')
             elif opt == '-s':
@@ -81,7 +81,7 @@ def main(argv):
         
         selected_server = input('Choose server to mount / unmount: ')
         server = config['servers'][int(selected_server)]
-        mount_from(server)
+        mount_from(server, config['options'])
     
 
 if __name__ == '__main__':
